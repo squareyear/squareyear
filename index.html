@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Square Year</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    /* 2in by 2in image */
+    img {
+      width: 2in;
+      height: 2in;
+      object-fit: cover; /* keep proportions without distortion */
+    }
+
+    .spacer {
+      height: 2in; /* distance between image and text */
+    }
+
+    .justified {
+      font-size: 10pt;
+      width: 100%;
+      max-width: 4in;          /* controls how wide the text spreads */
+      text-align: justify;
+    }
+
+    /* Trick to force single-line justification */
+    .justified:after {
+      content: "";
+      display: inline-block;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="squareyear-index.jpg" alt="Image">
+
+  <div class="spacer"></div>
+
+  <div class="justified">Square Year</div>
+
+</body>
+</html>
