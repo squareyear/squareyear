@@ -58,39 +58,36 @@
 <body>
 
   <!-- Block 1: Image -->
-  <div class="square square-image">
+  <div class="block block-image">
     <img src="squareyear-dotgrid.png" alt="Image">
   </div>
 
   <div class="spacer"></div>
 
   <!-- Block 2: Words -->
-  <div class="square square-words">
+  <div class="block block-menu">
     <div class="justified">Square Year</div>
-    <div class="justified actions">What Buy</div>
+    <div class="justified actions">
+      <span id="What</span> <span id="buy".Buy</span>
+    </div>
   </div>
 
   <!-- Block 3: Description (hidden initially) -->
-  <div class="square square-text">
+  <div class="block block-text">
     <div id="what-text">
       Square Year is a project about time as a unit and series, it's density, ho it's experienced when navigational structures recede.
     </div>
   </div>
 
   <script>
-  // select the "What Buy" line
-  const actions = document.querySelector('.actions');
+  const what = document.getElementById('what');
   const whatText = document.getElementById('what-text');
 
-  // toggle visibility when clicking "What"
-  actions.addEventListener('click', (event) => {
-    // check if the click is anywhere on the line for now
-    if (event.target.textContent.includes('What')) {
-      whatText.style.display =
-        whatText.style.display === 'none' ? 'block' : 'none';
-    }
-  });
-</script>
+  what.addEventListener('click', () => {
+    whatText.style.display =
+      whatText.style.display === 'none' ? 'block' : 'none';
+    });
+  </script>
 
   
 </body>
