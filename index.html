@@ -33,11 +33,18 @@
       text-align: justify;
     }
 
+    /* Wrapper for each line to force justified alignment to image width */
+    .line {
+      width: 100%;
+  max-width: 2in;      /* same as image width */
+    text-align: justify;  /* forces justification */
+    }
+
     /* Trick to force single-line justification */
     .justified:after {
-      content: "";
-      display: inline-block;
-      width: 100%;
+    content: "";
+    display: inline-block;
+    width: 100%;
     }
 
     .actions {
@@ -65,12 +72,17 @@
   <div class="spacer"></div>
 
   <!-- Block 2: Words -->
-  <div class="block block-menu">
-    <div class="justified">Square Year</div>
-    <div class="justified actions">
-      <span id="what">What&nbsp;</span> <span id="buy">Buy</span>
-    </div>
+<div class="block block-menu">
+  <div class="line">
+    <span class="justified">Square Year</span>
   </div>
+  <div class="line">
+    <span class="justified" id="what-text-line">
+      <span id="what">What</span> Buy
+    </span>
+  </div>
+</div>
+
 
   <!-- Block 3: Description (hidden initially) -->
   <div class="block block-text">
