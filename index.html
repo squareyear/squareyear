@@ -15,49 +15,41 @@
       font-family: system-ui, -apple-system, sans-serif;
     }
 
-    /* 2in by 2in image */
+    /* Block 1: Image */
     img {
       width: 2in;
       height: 2.1in;
-      object-fit: cover; /* keep proportions without distortion */
+      object-fit: cover;
     }
 
-    /* Main spacer between blocks */
+    /* Spacers */
     .spacer {
       height: 0.5in;
     }
+    .spacer-small {
+      height: 0.7in;
+    }
 
-    /* Line wrapper for justified text */
+    /* Block 2: Words */
     .line {
       max-width: 2in;       /* match image width */
-      text-align: justify;   /* force justification */
+      width: 100%;
+      display: flex;
+      justify-content: space-between; /* left and right alignment */
       font-size: 8pt;
     }
 
-    /* Trick to force single-line justification */
-    .line:after {
-      content: "";
-      display: inline-block;
-      width: 100%;
-    }
-
-    /* Small vertical spacer between lines in block-menu */
-    .spacer-small {
-      height: 1.5in;  /* adjust so the lines + image form a square visually */
-    }
-
-    /* Clickable word */
     .clickable {
       cursor: pointer;
-      color: blue;  /* optional styling */
+      color: blue; /* optional styling */
     }
 
-    /* Description block hidden initially */
+    /* Block 3: Description */
     #what-text {
-      display: none;
+      display: none;        /* hidden initially */
       margin-top: 0.5in;
       font-size: 8pt;
-      max-width: 2in;  /* same as image width */
+      max-width: 2in;
       text-align: justify;
     }
   </style>
@@ -71,27 +63,4 @@
 
   <div class="spacer"></div>
 
-  <!-- Block 2: Words -->
-  <div class="block block-menu">
-    <!-- Line 1 -->
-    <div class="line">
-      Square Year
-    </div>
-
-    <!-- Spacer between lines -->
-    <div class="spacer-small"></div>
-
-    <!-- Line 2 -->
-    <div class="line" id="actions-line">
-      <span id="what" class="clickable">What&nbsp;</span>Buy
-    </div>
-  </div>
-
-  <div class="spacer"></div>
-
-  <!-- Block 3: Description (hidden initially) -->
-  <div class="block block-text">
-    <div id="what-text">
-      Square Year is a project about time as a unit and series, its density, and how it's experienced when navigational structures recede.
-    </div>
-  </div>
+  <!-- Block 2:
