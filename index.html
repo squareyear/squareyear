@@ -22,44 +22,44 @@
       object-fit: cover; /* keep proportions without distortion */
     }
 
+    /* Main spacer between blocks */
     .spacer {
-      height: 0.5in; /* distance between image and text */
+      height: 0.5in;
     }
 
-    .justified {
-      font-size: 8pt;
-      width: 100%;
-      max-width: 2in;          /* controls how wide the text spreads */
-      text-align: justify;
-    }
-
-    /* Wrapper for each line to force justified alignment to image width */
+    /* Line wrapper for justified text */
     .line {
-      width: 100%;
-  max-width: 2in;      /* same as image width */
-    text-align: justify;  /* forces justification */
+      max-width: 2in;       /* match image width */
+      text-align: justify;   /* force justification */
+      font-size: 8pt;
     }
 
     /* Trick to force single-line justification */
-    .justified:after {
-    content: "";
-    display: inline-block;
-    width: 100%;
+    .line:after {
+      content: "";
+      display: inline-block;
+      width: 100%;
     }
 
-    .actions {
-      margin-top: 1.5in;
+    /* Small vertical spacer between lines in block-menu */
+    .spacer-small {
+      height: 0.7in;  /* adjust so the lines + image form a square visually */
+    }
+
+    /* Clickable word */
+    .clickable {
       cursor: pointer;
+      color: blue;  /* optional styling */
     }
 
+    /* Description block hidden initially */
     #what-text {
-      display: none;        /* hidden initially */
-      margin-top: 0.5in;    /* spacing from previous square */
-      font-size: 8pt;      /* same or slightly larger than words above */
-      max-width: 2in;       /* keep consistent with justified width */
-      text-align: justify;  /* optional for a clean block */
+      display: none;
+      margin-top: 0.5in;
+      font-size: 8pt;
+      max-width: 2in;  /* same as image width */
+      text-align: justify;
     }
-
   </style>
 </head>
 <body>
@@ -72,35 +72,26 @@
   <div class="spacer"></div>
 
   <!-- Block 2: Words -->
-<div class="block block-menu">
-  <div class="line">
-    <span class="justified">Square Year</span>
-  </div>
-  <div class="line">
-    <span class="justified" id="what-text-line">
-      <span id="what">What</span> Buy
-    </span>
-  </div>
-</div>
+  <div class="block block-menu">
+    <!-- Line 1 -->
+    <div class="line">
+      Square Year
+    </div>
 
+    <!-- Spacer between lines -->
+    <div class="spacer-small"></div>
+
+    <!-- Line 2 -->
+    <div class="line" id="actions-line">
+      <span id="what" class="clickable">What&nbsp;</span>Buy
+    </div>
+  </div>
+
+  <div class="spacer"></div>
 
   <!-- Block 3: Description (hidden initially) -->
   <div class="block block-text">
     <div id="what-text">
-      Square Year is a project about time as a unit and series, it's density, ho it's experienced when navigational structures recede.
+      Square Year is a project about time as a unit and series, its density, and how it's experienced when navigational structures recede.
     </div>
   </div>
-
-  <script>
-  const what = document.getElementById('what');
-  const whatText = document.getElementById('what-text');
-
-  what.addEventListener('click', () => {
-    whatText.style.display =
-      whatText.style.display === 'none' ? 'block' : 'none';
-    });
-  </script>
-
-  
-</body>
-</html>
