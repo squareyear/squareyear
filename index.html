@@ -10,12 +10,20 @@
       display: flex;
       min-height: 100vh;
       align-items: center;
-      justify-content: flex-start; /* align top-to-bottom */
+      justify-content: center; /* center entire column vertically */
       flex-direction: column;
       font-family: system-ui, -apple-system, sans-serif;
     }
 
-    /* Block 1: Image */
+    /* Image container to vertically center bottom edge */
+    .block-image {
+      display: flex;
+      align-items: flex-end; /* bottom edge of image aligns with container center */
+      justify-content: center;
+      height: 50vh; /* half viewport height for visual centering */
+      width: 100%;
+    }
+
     img {
       width: 2in;
       height: 2.1in;
@@ -30,16 +38,15 @@
       height: 0.7in;
     }
 
-    /* Block 2: Words container */
+    /* Block 2: Words */
     .block-menu {
       display: flex;
       flex-direction: column;
-      align-items: center; /* center horizontally */
+      align-items: center;
     }
 
-    /* Line wrapper for left/right words */
     .line {
-      width: 2in;               /* same as image width */
+      width: 2in;               
       display: flex;
       justify-content: space-between;
       font-size: 8pt;
@@ -47,12 +54,12 @@
 
     .clickable {
       cursor: pointer;
-      color: blue; /* optional styling */
+      color: blue;
     }
 
     /* Block 3: Description */
     #what-text {
-      display: none;        /* hidden initially */
+      display: none;        
       margin-top: 0.5in;
       font-size: 8pt;
       width: 2in;
@@ -91,11 +98,10 @@
   <!-- Block 3: Description -->
   <div class="block block-text">
     <div id="what-text">
-      Square Year is a project about time as a unit and series, its density, and how it's experienced when navigational structures recede.
+      Square Year is a project about time as a unit and series, its density, and how it's experienced when navigational structures recede. This descriptions is here to measure how many characters are required to fill a space a wide as it is tall with text to align with the site features above.  The first element is a graphic depictiong the project. The second is a menu that conveys the basics, an this description provides the reasoning behind the project. The next element that will be added below is a method to purchase.
     </div>
   </div>
 
-  <!-- JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const square = document.getElementById('square');
@@ -103,17 +109,17 @@
       const what = document.getElementById('what');
       const whatText = document.getElementById('what-text');
 
-      // Click "Square" to change text
+      // Toggle Square
       square.addEventListener('click', () => {
-        square.textContent = "19x19+";
+        square.textContent = square.textContent === "Square" ? "19x19+" : "Square";
       });
 
-      // Click "Year" to change text
+      // Toggle Year
       year.addEventListener('click', () => {
-        year.textContent = "2025";
+        year.textContent = year.textContent === "Year" ? "2025" : "Year";
       });
 
-      // Click "What" to toggle description
+      // Toggle What description
       what.addEventListener('click', () => {
         whatText.style.display =
           whatText.style.display === 'none' ? 'block' : 'none';
