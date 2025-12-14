@@ -4,23 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Square Year</title>
+
   <style>
     body {
       margin: 0;
       display: flex;
       min-height: 100vh;
       align-items: center;
-      justify-content: center; /* center entire column vertically */
+      justify-content: center;
       flex-direction: column;
       font-family: system-ui, -apple-system, sans-serif;
     }
 
-    /* Image container to vertically center bottom edge */
+    /* --- Block 1: Image --- */
     .block-image {
       display: flex;
-      align-items: flex-end; /* bottom edge of image aligns with container center */
+      align-items: flex-end;
       justify-content: center;
-      height: 50vh; /* half viewport height for visual centering */
+      height: 50vh;
       width: 100%;
     }
 
@@ -30,15 +31,16 @@
       object-fit: cover;
     }
 
-    /* Spacers */
+    /* --- Spacing --- */
     .spacer {
       height: 0.5in;
     }
+
     .spacer-small {
       height: 2in;
     }
 
-    /* Block 2: Words */
+    /* --- Block 2: Menu --- */
     .block-menu {
       display: flex;
       flex-direction: column;
@@ -46,7 +48,7 @@
     }
 
     .line {
-      width: 2in;               
+      width: 2in;
       display: flex;
       justify-content: space-between;
       font-size: 8pt;
@@ -57,28 +59,41 @@
       color: black;
     }
 
-    /* Block 3: Description */
-    #what-text {
-      display: none;        
-      margin-top: 0in;
-      font-size: 8pt;
+    /* --- Block 3: Description (STATIC SPACE) --- */
+    .block-text {
       width: 2in;
+      height: 2in;              /* ← RESERVED SQUARE */
+      margin-top: 0.5in;
+      position: relative;
+    }
+
+    #what-text {
+      font-size: 8pt;
       text-align: justify;
+
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    #what-text.show {
+      opacity: 1;
+      pointer-events: auto;
     }
   </style>
 </head>
+
 <body>
 
-  <!-- Block 1: Image -->
+  <!-- Block 1 -->
   <div class="block block-image">
     <img src="squareyear-dotgrid.png" alt="Image">
   </div>
 
   <div class="spacer"></div>
 
-  <!-- Block 2: Words -->
+  <!-- Block 2 -->
   <div class="block block-menu">
-    <!-- Top line -->
     <div class="line">
       <span id="square" class="clickable">Square</span>
       <span id="year" class="clickable">Year</span>
@@ -86,19 +101,16 @@
 
     <div class="spacer-small"></div>
 
-    <!-- Bottom line -->
     <div class="line">
       <span id="what" class="clickable">What</span>
       <span id="buy" class="clickable">Buy</span>
     </div>
   </div>
 
-  <div class="spacer"></div>
-
-  <!-- Block 3: Description -->
+  <!-- Block 3 -->
   <div class="block block-text">
     <div id="what-text">
-      Square Year is a project about time as a unit and series, its density, and how it's experienced when navigational structures recede. This descriptions is here to measure how many characters are required to fill a space a wide as it is tall with text to align with the site features above.  The first element is a graphic depictiong the project. The second is a menu that conveys the basics, an this description provides the reasoning behind the project. The next element that will be added below is a method to purchase.
+      Square Year is a project about time as a unit and series, its density, and how it is experienced when navigational structures recede. This description is calibrated to explore how much language is required to fill a square equal in width and height to the elements above. The first element is a graphic depiction of the project. The second is a menu that conveys its structure. This block provides its reasoning. A purchasing mechanism will follow.
     </div>
   </div>
 
@@ -109,20 +121,18 @@
       const what = document.getElementById('what');
       const whatText = document.getElementById('what-text');
 
-      // Toggle Square
       square.addEventListener('click', () => {
-        square.textContent = square.textContent === "Square" ? "19x19+" : "Square";
+        square.textContent =
+          square.textContent === "Square" ? "19x19+" : "Square";
       });
 
-      // Toggle Year
       year.addEventListener('click', () => {
-        year.textContent = year.textContent === "Year" ? "2025" : "Year";
+        year.textContent =
+          year.textContent === "Year" ? "2025" : "Year";
       });
 
-      // Toggle What description
       what.addEventListener('click', () => {
-        whatText.style.display =
-          whatText.style.display === 'none' ? 'block' : 'none';
+        whatText.classList.toggle('show');
       });
     });
   </script>
