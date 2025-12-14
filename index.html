@@ -8,40 +8,28 @@
   <style>
     body {
       margin: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
       font-family: system-ui, -apple-system, sans-serif;
-    }
-
-    /* ===== LAYOUT ANCHOR ===== */
-    .layout {
+      height: 100vh;
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
+      overflow: hidden; /* optional, prevents scrolling jump */
     }
 
-    .menu-anchor {
+    /* --- Layout container --- */
+    .layout {
       position: relative;
-      top: 50vh;                    /* viewport midpoint */
-      transform: translateY(-50%);  /* center menu block on it */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      width: 100%;
+      height: 100%;
     }
 
     /* --- Block 1: Image --- */
     .block-image {
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      height: auto;
-      width: 100%;
+      position: absolute;
+      left: 50%;
+      top: calc(50% - 1.05in - 0.5in); /* menu center - half image height - spacer */
+      transform: translateX(-50%);
     }
 
-    img {
+    .block-image img {
       width: 2in;
       height: 2.1in;
       object-fit: cover;
@@ -51,13 +39,16 @@
     .spacer {
       height: 0.5in;
     }
-
     .spacer-big {
       height: 1.9in;
     }
 
     /* --- Block 2: Menu --- */
     .block-menu {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -73,22 +64,23 @@
     .clickable {
       cursor: pointer;
       color: black;
-      user-select: none;
     }
 
-    /* --- Block 3: Description (STATIC SQUARE) --- */
+    /* --- Block 3: Description --- */
     .block-text {
+      position: absolute;
+      top: calc(50% + 1in + 0.5in); /* menu center + half menu height + spacer */
+      left: 50%;
+      transform: translateX(-50%);
       width: 2in;
-      height: 2in;          /* reserved square */
-      margin-top: 0.5in;
-      position: relative;
+      height: 2in; /* reserved square */
+      text-align: justify;
+      font-size: 8pt;
     }
 
     #what-text {
-      font-size: 8pt;
-      text-align: justify;
       opacity: 0;
-      transition: opacity 0.15s ease;
+      transition: opacity 0.2s ease;
       pointer-events: none;
     }
 
@@ -96,11 +88,11 @@
       opacity: 1;
       pointer-events: auto;
     }
+
   </style>
 </head>
 
 <body>
-
   <div class="layout">
 
     <!-- Block 1 -->
@@ -108,32 +100,28 @@
       <img src="squareyear-dotgrid.png" alt="Image">
     </div>
 
-    <div class="spacer"></div>
-
-    <div class="menu-anchor">
-
-      <!-- Block 2 -->
-      <div class="block block-menu">
-        <div class="line">
-          <span id="square" class="clickable">Square</span>
-          <span id="year" class="clickable">Year</span>
-        </div>
-
-        <div class="spacer-big"></div>
-
-        <div class="line">
-          <span id="what" class="clickable">What</span>
-          <span id="buy" class="clickable">Buy</span>
-        </div>
+    <!-- Block 2 -->
+    <div class="block block-menu">
+      <!-- Top line -->
+      <div class="line">
+        <span id="square" class="clickable">Square</span>
+        <span id="year" class="clickable">Year</span>
       </div>
 
-      <!-- Block 3 -->
-      <div class="block block-text">
-        <div id="what-text">
-          Square Year is a project about time as a unit and series, its density, and how it is experienced when navigational structures recede. This description is calibrated to explore how much language is required to fill a square equal in width and height to the elements above. The first element is a graphic depiction of the project. The second is a menu that conveys its structure. This block provides its reasoning. A purchasing mechanism will follow.
-        </div>
-      </div>
+      <div class="spacer-big"></div>
 
+      <!-- Bottom line -->
+      <div class="line">
+        <span id="what" class="clickable">What</span>
+        <span id="buy" class="clickable">Buy</span>
+      </div>
+    </div>
+
+    <!-- Block 3 -->
+    <div class="block block-text">
+      <div id="what-text">
+        Square Year is a project about time as a unit and series, its density, and how it is experienced when navigational structures recede. This description is calibrated to explore how much language is required to fill a square equal in width and height to the elements above. The first element is a graphic depiction of the project. The second is a menu that conveys its structure. This block provides its reasoning. A purchasing mechanism will follow.
+      </div>
     </div>
 
   </div>
@@ -145,16 +133,17 @@
       const what = document.getElementById('what');
       const whatText = document.getElementById('what-text');
 
+      // Toggle Square
       square.addEventListener('click', () => {
-        square.textContent =
-          square.textContent === "Square" ? "19x19+" : "Square";
+        square.textContent = square.textContent === "Square" ? "19x19+" : "Square";
       });
 
+      // Toggle Year
       year.addEventListener('click', () => {
-        year.textContent =
-          year.textContent === "Year" ? "2025" : "Year";
+        year.textContent = year.textContent === "Year" ? "2025" : "Year";
       });
 
+      // Toggle What description
       what.addEventListener('click', () => {
         whatText.classList.toggle('show');
       });
