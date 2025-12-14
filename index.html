@@ -10,47 +10,38 @@
       margin: 0;
       font-family: system-ui, -apple-system, sans-serif;
       height: 100vh;
-      width: 100%;
-      overflow: hidden; /* optional, prevents scrolling jump */
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
     }
 
     /* --- Layout container --- */
     .layout {
       display: flex;
       flex-direction: column;
-      align-items:center;
-      justify-content: center;
-      height: 100vh;
+      align-items: center;
+      justify-content: center; /* middle block vertically centered */
+      height: 100%;
     }
 
     /* --- Block 1: Image --- */
-    .block-image {
-      position: absolute;
-      left: 50%;
-      top: calc(50% - 1.05in - 0.5in); /* menu center - half image height - spacer */
-      transform: translateX(-50%);
-    }
-
     .block-image img {
       width: 2in;
-      height: 2.1in;
+      height: 2.1in;   /* fixed as requested */
       object-fit: cover;
+      display: block;
     }
 
-    /* --- Spacing --- */
+    /* --- Spacers --- */
     .spacer {
       height: 0.5in;
     }
     .spacer-big {
-      height: 1.9in;
+      height: 1.9in;   /* fixed as requested */
     }
 
     /* --- Block 2: Menu --- */
     .block-menu {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -70,20 +61,23 @@
 
     /* --- Block 3: Description --- */
     .block-text {
-      position: absolute;
-      top: calc(50% + 1in + 0.5in); /* menu center + half menu height + spacer */
-      left: 50%;
-      transform: translateX(-50%);
       width: 2in;
-      height: 2in; /* reserved square */
+      height: 2in;      /* reserved square */
+      margin-top: 0.5in;
       text-align: justify;
       font-size: 8pt;
+      position: relative;
     }
 
     #what-text {
       opacity: 0;
       transition: opacity 0.2s ease;
       pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
     }
 
     #what-text.show {
@@ -155,6 +149,5 @@
       });
     });
   </script>
-
 </body>
 </html>
