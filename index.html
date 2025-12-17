@@ -9,10 +9,14 @@
     body {
       margin: 0;
       font-family: system-ui, -apple-system, sans-serif;
+      color: #000;
+      background: #fff;
+
       height: 100vh;
       display: flex;
       justify-content: center;
-      overflow: hidden;
+      align-items: center;   /* helps ensure the centered stack is actually visible */
+      overflow: hidden;      /* desktop: no scroll */
     }
 
     /* --- Layout container --- */
@@ -20,25 +24,25 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center; /* middle block vertically centered */
-      height: 100%;
+      justify-content: center;
+      min-height: 100vh;     /* more robust than height: 100% */
     }
+
+    /* TEMP debug: remove later */
+    .block { outline: 1px solid rgba(0,0,0,0.08); }
 
     /* --- Block 1: Image --- */
     .block-image img {
       width: 2in;
-      height: 2.1in;   /* fixed as requested */
+      height: 2.1in;
       object-fit: cover;
       display: block;
+      background: rgba(0,0,0,0.04); /* shows a placeholder tone if image fails */
     }
 
     /* --- Spacers --- */
-    .spacer {
-      height: 0.5in;
-    }
-    .spacer-big {
-      height: 1.9in;   /* fixed as requested */
-    }
+    .spacer { height: 0.5in; }
+    .spacer-big { height: 1.9in; }
 
     /* --- Block 2: Menu --- */
     .block-menu {
@@ -52,36 +56,114 @@
       display: flex;
       justify-content: space-between;
       font-size: 8pt;
+      line-height: 1.2;
     }
 
     .clickable {
       cursor: pointer;
-      color: black;
+      color: #000;
+      user-select: none;
     }
 
     /* --- Block 3: Description --- */
     .block-text {
       width: 2in;
-      height: 2in;       /* reserved square on desktop */
-      margin-top: 0.5in; /* exactly 0.5" below Block 2 */
+      height: 2in;       /* desktop: reserved square */
+      margin-top: 0.5in;
       text-align: justify;
       font-size: 8pt;
-      position: relative;
     }
 
     /* Hidden by default; becomes normal-flow content when shown */
-    #what-text {
-      display: none;
-    }
-
-    #what-text.show {
-      display: block;
-    }
+    #what-text { display: none; }
+    #what-text.show { display: block; }
 
     /* --- Mobile overrides --- */
     @media (max-width: 768px) {
       body {
         height: auto;
-        overflow-y: auto;   /* scroll from the start */
+        overflow-y: auto;   /* phone: scroll from the start */
         overflow-x: hidden;
-        display: block;     /* stop flex-centering the whole p*
+        display: block;     /* stop viewport-centering on phone */
+      }
+
+      .layout {
+        min-height: 0;
+        justify-content: flex-start;
+        padding-top: 0.75in;
+        padding-bottom: 0.75in;
+      }
+
+      .spacer-big {
+        height: 0.5in; /* reduce the huge gap on phones */
+      }
+
+      .block-text {
+        height: auto; /* phone: let text define height */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- Block 1 -->
+    <div class="block block-image">
+      <img src="squareyear-dotgrid.png" alt="Square Year graphic">
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- Block 2 -->
+    <div class="block block-menu" id="menu">
+      <div class="line">
+        <span id="square" class="clickable">Square</span>
+        <span id="year" class="clickable">Year</span>
+      </div>
+
+      <div class="spacer-big"></div>
+
+      <div class="line">
+        <span id="what" class="clickable">What</span>
+        <span id="buy" class="clickable">Buy</span>
+      </div>
+    </div>
+
+    <!-- Block 3 -->
+    <div class="block block-text">
+      <div id="what-text">
+        Square Year is a project about time as a unit and series, its density, and how it is experienced when navigational structures recede. This description is calibrated to explore how much language is required to fill a square equal in width and height to the elements above. The first element is a graphic depiction of the project. The second is a menu that conveys its structure. This block provides its reasoning. A purchasing mechanism will follow. The second is a menu that conveys its structure. This block provides its reasoning. A purchasing mechanism will follow.
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const square = document.getElementById('square');
+      const year = document.getElementById('year');
+      const what = document.getElementById('what');
+      const whatText = document.getElementById('what-text');
+
+      square.addEventListener('click', () => {
+        square.textContent = square.textContent === "Square" ? "19x19+" : "Square";
+      });
+
+      year.addEventListener('click', () => {
+        year.textContent = year.textContent === "Year" ? "2025" : "Year";
+      });
+
+      what.addEventListener('click', () => {
+        const isShowing = whatText.classList.toggle('show');
+
+        if (isShowing && window.matchMedia('(max-width: 768px)').matches) {
+          requestAnimationFrame(() => {
+            whatText.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
