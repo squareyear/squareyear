@@ -62,90 +62,26 @@
     /* --- Block 3: Description --- */
     .block-text {
       width: 2in;
-      height: 2in;      /* reserved square */
+      height: 2in;       /* reserved square on desktop */
       margin-top: 0.5in; /* exactly 0.5" below Block 2 */
       text-align: justify;
       font-size: 8pt;
       position: relative;
     }
 
+    /* Hidden by default; becomes normal-flow content when shown */
     #what-text {
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      pointer-events: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      display: none;
     }
 
     #what-text.show {
-      opacity: 1;
-      pointer-events: auto;
+      display: block;
     }
 
-  </style>
-</head>
-
-<body>
-  <div class="layout">
-
-    <!-- Block 1 -->
-    <div class="block block-image">
-      <img src="squareyear-dotgrid.png" alt="Image">
-    </div>
-
-    <div class="spacer"></div>
-
-    <!-- Block 2 -->
-    <div class="block block-menu">
-      <!-- Top line -->
-      <div class="line">
-        <span id="square" class="clickable">Square</span>
-        <span id="year" class="clickable">Year</span>
-      </div>
-
-      <div class="spacer-big"></div>
-
-      <!-- Bottom line -->
-      <div class="line">
-        <span id="what" class="clickable">What</span>
-        <span id="buy" class="clickable">Buy</span>
-      </div>
-    </div>
-
-    <!-- Block 3 -->
-    <div class="block block-text">
-      <div id="what-text">
-        Square Year is a project about time as a unit and series, its density, and how it is experienced when navigational structures recede. This description is calibrated to explore how much language is required to fill a square equal in width and height to the elements above. The first element is a graphic depiction of the project. The second is a menu that conveys its structure. This block provides its reasoning. A purchasing mechanism will follow.The second is a menu that conveys its structure. This block provides its reasoning. A purchasing mechanism will follow.
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const square = document.getElementById('square');
-      const year = document.getElementById('year');
-      const what = document.getElementById('what');
-      const whatText = document.getElementById('what-text');
-
-      // Toggle Square
-      square.addEventListener('click', () => {
-        square.textContent = square.textContent === "Square" ? "19x19+" : "Square";
-      });
-
-      // Toggle Year
-      year.addEventListener('click', () => {
-        year.textContent = year.textContent === "Year" ? "2025" : "Year";
-      });
-
-      // Toggle What description
-      what.addEventListener('click', () => {
-        whatText.classList.toggle('show');
-      });
-    });
-  </script>
-</body>
-</html>
+    /* --- Mobile overrides --- */
+    @media (max-width: 768px) {
+      body {
+        height: auto;
+        overflow-y: auto;   /* scroll from the start */
+        overflow-x: hidden;
+        display: block;     /* stop flex-centering the whole p*
